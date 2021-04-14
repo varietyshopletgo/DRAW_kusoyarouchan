@@ -37,11 +37,6 @@
                 <i class="fas fa-bold"></i>
               </span>
             </button>
-            <button class="button is-primary is-large">
-              <span class="icon">
-                <i class="fas fa-bold"></i>
-              </span>
-            </button>
           </p>
           <!-- <ul class="stamps">
             <li
@@ -87,20 +82,6 @@
             </li>
           </ul>
           <div class="mt-1">
-            <label>ズーム量(%)</label>
-            <input
-              class="is-inline-block"
-              style="width: 60px"
-              type="number"
-              v-model.number="zoomAmount"
-            />
-            <label>回転量(°)</label>
-            <input
-              class="is-inline-block"
-              style="width: 60px"
-              type="number"
-              v-model.number="rotateAmount"
-            />
             <label>表情(キャンバス)</label>
             <select
               v-model="face"
@@ -114,7 +95,7 @@
           </div>
         </div>
         <hr/>
-        <label class="w100 button is-primary is-large">
+        <!-- <label class="w100 button is-primary is-large">
           画像を追加する
           <input
             class="select-image-button"
@@ -122,10 +103,7 @@
             accept="image/*"
             @change="onAddImage"
           >
-        </label>        
-      </div>
-    </div>
-    <div class="columns column">
+        </label>         -->
       <a
         ref="download"
         download="dasa-t.png"
@@ -135,7 +113,8 @@
           @click="download"
         >＞＞＞画像をダウンロード＜＜＜
         </button>
-      </a>
+      </a>        
+      </div>
     </div>
   </div>
 </template>

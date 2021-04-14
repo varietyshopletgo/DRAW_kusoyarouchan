@@ -29,8 +29,8 @@ export default {
 
   mounted() {
     this.app = new PIXI.Application({
-      width: WIDTH,
-      height: HEIGHT,
+      width: window.innerWidth,
+      height: window.innerWidth,
       backgroundColor: 0xffffff,
       view: this.$el
     });
