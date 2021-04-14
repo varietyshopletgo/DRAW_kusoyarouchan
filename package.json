@@ -1,0 +1,20 @@
+{
+  "name": "nuxt-first",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@nuxtjs/axios": "^5.13.1",
+    "@pixi/accessibility": "^6.0.2",
+    "@pixi/text": "^6.0.2",
+    "core-js": "^3.9.1",
+    "nuxt": "^2.15.3",
+    "pixi.js-legacy": "^6.0.2"
+  }
+}
