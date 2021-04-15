@@ -15,15 +15,28 @@ export default {
       layerMask: null,
       layerContainer: null,
       baseTextures: [
-        PIXI.Texture.from("001_mask.png"),
-        PIXI.Texture.from("002_mask.png"),
-        PIXI.Texture.from("003_mask.png")
+        PIXI.Texture.from("mask.png")
       ],
       drawTextures: [
-        PIXI.Texture.from("a1_img.png"),
-        PIXI.Texture.from("a2_img.png"),
-        PIXI.Texture.from("a3_img.png")
-      ] 
+        PIXI.Texture.from("blue-01.png"),
+        PIXI.Texture.from("blue-02.png"),
+        PIXI.Texture.from("blue-03.png"),
+        PIXI.Texture.from("blue-04.png"),
+        PIXI.Texture.from("blue-05.png"),
+        PIXI.Texture.from("blue-06.png"),
+        PIXI.Texture.from("blue-07.png"),
+        PIXI.Texture.from("orange-01.png"),
+        PIXI.Texture.from("orange-02.png"),
+        PIXI.Texture.from("orange-03.png"),
+        PIXI.Texture.from("orange-04.png"),
+        PIXI.Texture.from("orange-05.png"),
+        PIXI.Texture.from("orange-06.png"),
+        PIXI.Texture.from("orange-07.png"),
+        PIXI.Texture.from("orange-08.png"),
+        PIXI.Texture.from("mix-01.png"),
+        PIXI.Texture.from("mix-02.png"),
+        PIXI.Texture.from("mix-03.png")      
+] 
     };
   },
 
@@ -32,17 +45,18 @@ export default {
       width: window.innerWidth,
       height: window.innerWidth,
       backgroundColor: 0xffffff,
-      view: this.$el
+      view: this.$el,
+      preserveDrawingBuffer: true
     });
     this.layerContainer = new PIXI.Container();
-    let base = this.loadBaseImage();
+    // let base = this.loadBaseImage();
     let overlay = this.loadOverlayImage();
-    this.app.stage.addChild(this.layerContainer, base, overlay);
+    this.app.stage.addChild(this.layerContainer, overlay);
   },
   methods: {
     // 服のしわとかを乗算で被せるレイヤー(ここに画用紙らしさを乗せる？)
     loadOverlayImage() {
-      let sprite = new PIXI.Sprite.from("overlay.png");
+      let sprite = new PIXI.Sprite.from("paper_texture.png");
       sprite.width = this.app.renderer.width;
       sprite.height = this.app.renderer.height;
       sprite.blendMode = PIXI.BLEND_MODES.MULTIPLY;
@@ -50,13 +64,13 @@ export default {
     },
 
     // ベースレイヤー
-    loadBaseImage() {
-      let sprite = new PIXI.Sprite.from(this.baseTextures[0]);
-      sprite.width = this.app.renderer.width;
-      sprite.height = this.app.renderer.height;
-      this.charaSprite = sprite;
-      return sprite;
-    },
+    // loadBaseImage() {
+    //   let sprite = new PIXI.Sprite.from(this.baseTextures[0]);
+    //   sprite.width = this.app.renderer.width;
+    //   sprite.height = this.app.renderer.height;
+    //   this.charaSprite = sprite;
+    //   return sprite;
+    // },
 
     // 追加筆跡レイヤー
     addPict() {
@@ -65,6 +79,7 @@ export default {
       sprite.x = this.app.renderer.width / 2;
       sprite.y = this.app.renderer.height / 2;
       sprite.anchor.x = sprite.anchor.y = 0.5;
+      sprite.blendMode = PIXI.BLEND_MODES.MULTIPLY;      
       sprite.name = "画像" + LAYER_ID++;
       this.subscribe(sprite);
       this.layerContainer.addChild(sprite);

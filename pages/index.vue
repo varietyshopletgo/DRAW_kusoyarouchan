@@ -2,6 +2,17 @@
   <div>
     <div class="columns is-centered">
       <div class="column">
+        <div>
+          <p class="buttons">
+            <button 
+            class="button is-primary is-large" 
+            @click="addPict">
+            筆跡を追加する
+            </button>
+          </p>
+        </div>
+      </div>  
+      <div class="column">
         <MainCanvas
           ref="main"
           @add-layer="onAddLayer"
@@ -9,45 +20,8 @@
         />
       </div>
       <div class="column">
-        <label class="label">色</label>
         <div>
-          <p class="buttons">
-            <button class="button is-primary is-large" @click="addPict">
-              <span class="icon">
-                <i class="fas fa-bold"></i>
-              </span>
-            </button>
-            <button class="button is-primary is-large">
-              <span class="icon">
-                <i class="fas fa-bold"></i>
-              </span>
-            </button>
-            <button class="button is-primary is-large">
-              <span class="icon">
-                <i class="fas fa-bold"></i>
-              </span>
-            </button>
-            <button class="button is-primary is-large">
-              <span class="icon">
-                <i class="fas fa-bold"></i>
-              </span>
-            </button>
-            <button class="button is-primary is-large">
-              <span class="icon">
-                <i class="fas fa-bold"></i>
-              </span>
-            </button>
-          </p>
-          <!-- <ul class="stamps">
-            <li
-              v-for="(stamp, i) in stamps"
-              :key="i"
-            ><a @click="addStamp">{{stamp}}</a></li>
-          </ul> -->
-        </div>
-        <hr/>
-        <div>
-          <label class="label">レイヤー(この機能いる？)</label>
+          <label class="label">レイヤー</label>
           <ul class="layers">
             <li v-if="layers.length < 1">なし</li>
             <li
@@ -57,7 +31,6 @@
               :class="layerClass(layer)"
             >
               <p>{{ layer.name }}</p>
-              <div>
                 <span
                   class="mdi mdi-plus-circle"
                   @click="onZoom(layer, zoomScale)"
@@ -78,10 +51,9 @@
                   class="mdi mdi-close-circle"
                   @click="onDelete(layer)"
                 ></span>
-              </div>
             </li>
           </ul>
-          <div class="mt-1">
+          <!-- <div class="mt-1">
             <label>表情(キャンバス)</label>
             <select
               v-model="face"
@@ -92,9 +64,7 @@
               <option value="1">😄</option>
               <option value="2">😧</option>
             </select>
-          </div>
-        </div>
-        <hr/>
+          </div> -->
         <!-- <label class="w100 button is-primary is-large">
           画像を追加する
           <input
@@ -104,18 +74,19 @@
             @change="onAddImage"
           >
         </label>         -->
-      <a
-        ref="download"
-        download="dasa-t.png"
-      >
-        <button
-          class="button is-primary is-large"
-          @click="download"
-        >＞＞＞画像をダウンロード＜＜＜
-        </button>
-      </a>        
+        <a
+          ref="download"
+          download="kusoyarou-gahaku.png"
+        >
+          <button
+            class="button is-primary is-large"
+            @click="download">
+            ＞＞＞画像を保存＜＜＜
+          </button>
+        </a>        
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -187,9 +158,7 @@
         this.$refs.main.addPict();
       },
       download() {
-        const data = this.$refs.main.$el
-          .toDataURL("image/png")
-          .replace("image/png", "image/octet-stream");
+        const data = this.$refs.main.$el.toDataURL("image/png");
         this.$refs.download.setAttribute("href", data);
       },
       onSelectLayer(sprite) {
@@ -250,6 +219,10 @@
     margin-top: 5px;
   }
 
+  .mdi {
+    font-size: 3rem;
+  }
+
   .mdi-plus-circle {
     color: blue;
   }
@@ -258,7 +231,7 @@
     color: green;
   }
 
-  .mdi-close-circle {
+  .mdi-close-circle {    
     margin-left: 1rem;
     color: red;
   }
