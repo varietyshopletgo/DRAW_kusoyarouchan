@@ -1,15 +1,5 @@
 <template>
   <div class="columns is-gapless is-centered">     
-    <!-- ここから筆跡ボタン -->
-    <div class="column">
-        <p class="buttons">
-          <button 
-          class="button is-primary is-large" 
-          @click="addPict">
-          筆跡を追加する
-          </button>
-        </p>
-    </div>  
 
     <!-- ここからメインキャンバス -->
     <div class="column">
@@ -19,7 +9,16 @@
         @select-layer="onSelectLayer"
       />
     </div>
-
+    <!-- ここから筆跡ボタン -->
+    <div class="column">
+        <p class="buttons">
+          <button 
+          class="button is-primary" 
+          @click="addPict">
+          筆跡を追加する
+          </button>
+        </p>
+    </div>  
     <!-- ここからレイヤー -->
     <div class="column">
       <div>
@@ -207,7 +206,7 @@
   }
 
   .mdi {
-    font-size: 3rem;
+    font-size: 1.5rem;
   }
 
   .mdi-plus-circle {

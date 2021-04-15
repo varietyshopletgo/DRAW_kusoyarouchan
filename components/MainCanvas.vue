@@ -174,7 +174,7 @@ export default {
 
 <style>
 .main-canvas {
-  margin: 2rem 0;
+  margin: 0 0;
   border: 1px solid #ccc;
 }
 </style>
