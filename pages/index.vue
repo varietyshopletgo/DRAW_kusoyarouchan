@@ -1,79 +1,67 @@
 <template>
-  <div>
-    <div class="columns is-centered">
-      <div class="column">
-        <div>
-          <p class="buttons">
-            <button 
-            class="button is-primary is-large" 
-            @click="addPict">
-            筆跡を追加する
-            </button>
-          </p>
-        </div>
-      </div>  
-      <div class="column">
-        <MainCanvas
-          ref="main"
-          @add-layer="onAddLayer"
-          @select-layer="onSelectLayer"
-        />
-      </div>
-      <div class="column">
-        <div>
-          <label class="label">レイヤー</label>
-          <ul class="layers">
-            <li v-if="layers.length < 1">なし</li>
-            <li
-              v-for="layer in rLayers"
-              :key="layer.name"
-              draggable="true"
-              :class="layerClass(layer)"
-            >
-              <p>{{ layer.name }}</p>
-                <span
-                  class="mdi mdi-plus-circle"
-                  @click="onZoom(layer, zoomScale)"
-                ></span>
-                <span
-                  class="mdi mdi-minus-circle"
-                  @click="onZoom(layer, -zoomScale)"
-                ></span>
-                <span
-                  class="mdi mdi-rotate-left"
-                  @click="onRotate(layer, -rotateAmount)"
-                ></span>
-                <span
-                  class="mdi mdi-rotate-right"
-                  @click="onRotate(layer, rotateAmount)"
-                ></span>
-                <span
-                  class="mdi mdi-close-circle"
-                  @click="onDelete(layer)"
-                ></span>
-            </li>
-          </ul>
-          <!-- <div class="mt-1">
-            <label>表情(キャンバス)</label>
-            <select
-              v-model="face"
-              style="width: 80px"
-              @change="changeFace"
-            >
-              <option value="0">🙂</option>
-              <option value="1">😄</option>
-              <option value="2">😧</option>
-            </select>
-          </div> -->
-        <!-- <label class="w100 button is-primary is-large">
-          画像を追加する
-          <input
-            class="select-image-button"
-            type="file"
-            accept="image/*"
-            @change="onAddImage"
+  <div class="columns is-gapless is-centered">     
+    <!-- ここから筆跡ボタン -->
+    <div class="column">
+        <p class="buttons">
+          <button 
+          class="button is-primary is-large" 
+          @click="addPict">
+          筆跡を追加する
+          </button>
+        </p>
+    </div>  
+
+    <!-- ここからメインキャンバス -->
+    <div class="column">
+      <MainCanvas
+        ref="main"
+        @add-layer="onAddLayer"
+        @select-layer="onSelectLayer"
+      />
+    </div>
+
+    <!-- ここからレイヤー -->
+    <div class="column">
+      <div>
+        <label class="label">レイヤー</label>
+        <ul class="layers">
+          <li v-if="layers.length < 1">なし</li>
+          <li
+            v-for="layer in rLayers"
+            :key="layer.name"
+            draggable="true"
+            :class="layerClass(layer)"
           >
-        </label>         -->
+            <p>{{ layer.name }}</p>
+              <span
+                class="mdi mdi-plus-circle"
+                @click="onZoom(layer, zoomScale)"
+              ></span>
+              <span
+                class="mdi mdi-minus-circle"
+                @click="onZoom(layer, -zoomScale)"
+              ></span>
+              <span
+                class="mdi mdi-rotate-left"
+                @click="onRotate(layer, -rotateAmount)"
+              ></span>
+              <span
+                class="mdi mdi-rotate-right"
+                @click="onRotate(layer, rotateAmount)"
+              ></span>
+              <span
+                class="mdi mdi-close-circle"
+                @click="onDelete(layer)"
+              ></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <hr />
+
+    <!-- ここからダウンロード     -->
+    <div class="column">
+      <div class="download">   
         <a
           ref="download"
           download="kusoyarou-gahaku.png"
@@ -83,10 +71,9 @@
             @click="download">
             ＞＞＞画像を保存＜＜＜
           </button>
-        </a>        
-      </div>
+        </a>
+      </div>        
     </div>
-  </div>
   </div>
 </template>
 
@@ -244,23 +231,11 @@
     margin-top: 10px;
   }
 
-  .stamps {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  .button{
+    margin: 1rem auto;
   }
-
-  .stamps li {
-    padding: 2px;
-  }
-
-  .stamps a {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px;
-    display: inline-block;
-    width: 100px;
+  .download{
+    text-align: center;
   }
 
   .selected {

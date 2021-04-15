@@ -79,6 +79,8 @@ export default {
       sprite.x = this.app.renderer.width / 2;
       sprite.y = this.app.renderer.height / 2;
       sprite.anchor.x = sprite.anchor.y = 0.5;
+      sprite.scale.x = 0.5;
+      sprite.scale.y = 0.5;
       sprite.blendMode = PIXI.BLEND_MODES.MULTIPLY;      
       sprite.name = "画像" + LAYER_ID++;
       this.subscribe(sprite);
@@ -172,6 +174,7 @@ export default {
 
 <style>
 .main-canvas {
+  margin: 2rem 0;
   border: 1px solid #ccc;
 }
 </style>
