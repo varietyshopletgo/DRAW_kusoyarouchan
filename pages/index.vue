@@ -71,6 +71,14 @@
             ＞＞＞画像を保存＜＜＜
           </button>
         </a>
+      </div>    
+      <!-- ここからアップロード     -->
+      <div class="upload">       
+        <button
+          class="button is-primary is-large"
+          @click="upload">
+          ＞＞＞画像を投稿＜＜＜
+        </button>
       </div>        
     </div>
   </div>
@@ -78,8 +86,7 @@
 
 <script>
   import MainCanvas from "~/components/MainCanvas";
-  import stampsJson from "~/store/stamps.json";
-  import InputTextForm from "~/components/InputTextForm";
+  import firebase from "~/plugins/firebase"
   if (process.browser) {
   console.log(PIXI)
   }
@@ -92,7 +99,6 @@
         layers: [],
         zoomAmount: 10,
         rotateAmount: 30,
-        stamps: stampsJson
       };
     },
     computed: {
@@ -134,18 +140,29 @@
         this.$refs.main.remove(sprite);
         this.layers.splice(this.layers.indexOf(sprite), 1);
       },
-      onAddText(obj) {
-        this.$refs.main.addText(obj)
-      },
-      addStamp(e) {
-        this.$refs.main.addImage(e.target.src);
-      },
       addPict() {
         this.$refs.main.addPict();
       },
       download() {
         const data = this.$refs.main.$el.toDataURL("image/png");
         this.$refs.download.setAttribute("href", data);
+      },
+      upload() {
+        let date = new Date();
+        let Y =date.getFullYear();
+        let M = ("00" + (date.getMonth()+1)).slice(-2);
+        let D = ("00" + date.getDate()).slice(-2);
+        let h = ("00" + date.getHours()).slice(-2);
+        let m = ("00" + date.getMinutes()).slice(-2);
+        let s = ("00" + date.getSeconds()).slice(-2);
+        let timestamp = Y + M + D + h + m + s + '.png';        
+          // 画像ファイルをbase64で取得
+        var data = this.$refs.main.$el.toDataURL("image/png");        
+        var storage = firebase.storage();
+        var ref = storage.ref().child(timestamp);
+        ref.putString(data, 'data_url').then(snapshot =>{
+          console.log('錬成した人体は無事に送信されました')
+        });
       },
       onSelectLayer(sprite) {
         console.log(sprite);
@@ -156,14 +173,9 @@
           selected: layer.name === this.selectedLayer
         };
       },
-      changeFace(event) {
-        console.log(event);
-        this.$refs.main.changeFace(event.target.value);
-      }
     },
     components: {
       MainCanvas,
-      InputTextForm
     },
     mounted() {
       window.twemoji.parse(document.body);

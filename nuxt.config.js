@@ -1,5 +1,7 @@
 export default {
   mode: "spa",
+  target: 'static',
+  ssr: true,
   /*
    ** Headers of the page
    */
@@ -61,7 +63,14 @@ export default {
     {
       src: "~/plugins/pixi",
       ssr: false
+    },
+    {
+      src: '~/plugins/vueTyper.js'
+    },
+    {
+      src: '~/plugins/vue-particles.js'
     }
+
   ],
   /*
    ** Nuxt.js dev-modules
