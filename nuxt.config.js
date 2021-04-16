@@ -4,7 +4,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: "人体錬成用お絵かきアプリ開発テスト",
+    title: "クソ野郎ちゃん｜v1.0",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },

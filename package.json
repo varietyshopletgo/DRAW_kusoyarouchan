@@ -21,8 +21,8 @@
     "firebase": "^8.4.1",
     "nuxt": "^2.15.3",
     "nuxt-fontawesome": "^0.4.0",
+    "particles.vue": "^2.9.2",
     "pixi.js-legacy": "^6.0.2",
-    "vue-flat-surface-shader": "^1.0.5",
     "vue-typer": "^1.2.0"
   },
   "devDependencies": {
