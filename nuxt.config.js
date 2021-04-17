@@ -1,5 +1,6 @@
 export default {
   mode:"spa",
+  ssr: false,
   /*
    ** Headers of the page
    */
@@ -67,8 +68,10 @@ export default {
     },
     {
       src: '~/plugins/vue-particles.js'
+    },
+    {
+      src: '~/plugins/particleEffectButton.js'
     }
-
   ],
   /*
    ** Nuxt.js dev-modules

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <nav-bar />
     <!-- ここからメイン -->
     <section class="hero is-fullheight"> 
       <div class="hero-body">
@@ -44,7 +43,7 @@
             :pre-type-delay='70'
             :type-delay='70'
             :pre-erase-delay='2000'
-            :erase-delay='250'
+            :erase-delay='550'
             erase-style='select-all'
             :erase-on-complete='false'
             caret-animation='blink'
@@ -52,17 +51,29 @@
             </span>
           </h1>
         </div>     
-        <div class="buttons">
-          <p>説明文説明文説明文</p>
-          <div>
-          <button class="button">肉体をつくる</button>            
+        <div id="sub">
+          <div class="pbutton">
+            <ParticleBtn
+            :visible.sync="btnOps1.visible"
+            :animating.sync="btnOps1.animating"
+            :options="btnOps1"
+            cls="btn-cls"
+            >
+            肉体を錬成する
+            </ParticleBtn>
           </div>
-          <div>
-          <button class="button">精神をつくる</button>
+          <div class="pbutton">
+            <ParticleBtn
+            :visible.sync="btnOps2.visible"
+            :animating.sync="btnOps2.animating"
+            :options="btnOps2"
+            cls="btn-cls"
+            >
+            精神を錬成する
+            </ParticleBtn>
           </div>          
-        </div>
-      </div> 
-
+       </div> 
+     </div>
     </section>
   </div>
 </template>
@@ -70,12 +81,61 @@
 <script>
   import NavBar from '~/components/NavBar.vue';
   import Particles from '~/components/Particles.vue';
+  import ParticleBtn from "vue-particle-effect-buttons"
+
   export default {
+    data() {
+      return {
+        btnOps1: {
+          type: "circle",
+          easing: "easeInOutCubic",
+          duration: 300,
+          size: 60,
+          direction: "bottom",
+          particlesAmountCoefficient: 1,
+          oscillationCoefficient: 1,
+          color: function () {
+            return Math.random() < 0.5 ? "#000000" : "#ffffff";
+          },
+          onComplete: () => {
+            console.log("complete");
+          },
+          onBegin: () => {
+            console.log("begin");
+          },
+          visible: true,
+          animating: false
+        },
+       btnOps2: {
+          type: "rectangle",
+          easing: "easeInOutCubic",
+          duration: 300,
+          size: 60,
+          direction: "bottom",
+          particlesAmountCoefficient: 1,
+          oscillationCoefficient: 1,
+          color: function () {
+            return Math.random() < 0.5 ? "#000000" : "#ffffff";
+          },
+          onComplete: () => {
+            console.log("complete");
+          },
+          onBegin: () => {
+            console.log("begin");
+          },
+          visible: true,
+          animating: false
+        },        
+      }
+    },    
     components: {
       NavBar,
-      Particles
-    }
+      Particles,
+      ParticleBtn
+    },
+
   }
+
 </script>
 
 <style>
@@ -96,16 +156,25 @@ html, body {
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
 }
-.buttons {
-  margin: 0 auto;
-  color: white;
+#sub {
+  width: 80vw;
+  position: absolute;
+  text-align: center;
+  top: 68%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);  
 }
+
+.pbutton {
+  margin-bottom: 1rem;
+}
+
 h1 {
   color: #000000 !important;
-  font-family: 'Dosis', sans-serif;
+  font-family: 'Hannari', sans-serif;
 }
 .vue-typer {
-  font-family: monospace;
+  font-family: Hannari;
 }
 
 .vue-typer .custom.char {
@@ -118,11 +187,10 @@ h1 {
 
 .vue-typer .custom.caret {
   width: 10px;
-  background-color: #3F51B5;
+  background-color: #FFFFFF;
 }
 .vue-typer .custom.char.selected {
-  color: #607D8B;
-  background-color: transparent;
+  color: #FFFFFF;
   text-decoration: line-through;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div class="columns is-gapless is-centered">     
-
     <!-- ここからメインキャンバス -->
     <div class="column">
       <MainCanvas
