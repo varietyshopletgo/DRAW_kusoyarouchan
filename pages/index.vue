@@ -8,7 +8,7 @@
         @select-layer="onSelectLayer"
       />
     </div>
-    <!-- ここから筆跡ボタン -->
+    <!-- ここから筆跡ボタン開始 -->
     <div class="column">
         <p class="buttons">
           <button 
