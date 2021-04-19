@@ -41,7 +41,7 @@ export default {
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/earlyaccess/nicomoji.css"
+        href: "https://fonts.googleapis.com/css?family=Sawarabi+Mincho"
       }
     ]
   },
@@ -71,7 +71,13 @@ export default {
     },
     {
       src: '~/plugins/particleEffectButton.js'
-    }
+    },
+    {
+      src: '~/plugins/vue-swal'
+    },
+    {
+      src: '~/plugins/epic-spinner'
+    }     
   ],
   /*
    ** Nuxt.js dev-modules
