@@ -54,6 +54,16 @@
         <div id="sub">
           <div class="pbutton">
             <ParticleBtn
+            :visible.sync="btnOps2.visible"
+            :animating.sync="btnOps2.animating"
+            :options="btnOps2"
+            cls="btn-cls"
+            >
+            精神を錬成する
+            </ParticleBtn>
+          </div>          
+          <div class="pbutton">
+            <ParticleBtn
             :visible.sync="btnOps1.visible"
             :animating.sync="btnOps1.animating"
             :options="btnOps1"
@@ -62,16 +72,7 @@
             肉体を錬成する
             </ParticleBtn>
           </div>
-          <div class="pbutton">
-            <ParticleBtn
-            :visible.sync="btnOps2.visible"
-            :animating.sync="btnOps2.animating"
-            :options="btnOps2"
-            cls="btn-cls"
-            >
-            精神を錬成する
-            </ParticleBtn>
-          </div>
+
           <div class="imitation"><router-link to ="/draw">・</router-link></div> 
        </div> 
      </div>
