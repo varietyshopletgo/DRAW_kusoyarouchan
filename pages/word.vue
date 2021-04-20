@@ -2,7 +2,7 @@
   <div id="app">
     <section class="hero is-fullheight"> 
       <div class="hero-body">     
-        <div id="main is-centered">
+        <div id="main">
           <div class="orbit-wrapper">
             <div class="orbit-spinner" @click="pageBack">
               <div class="orbit"></div>
@@ -20,7 +20,7 @@
               <p>あなたに変わってクソ野郎ちゃんが世界につぶやくぜ</p>
             </div>
             <div class="says">
-              <p>あなたのクソ野郎なところ、出しちゃっていいよ</p>
+              <p>あなたのクソ野郎なところ、全部出しちゃっていいよ</p>
             </div>
           </div>
           <div>
@@ -54,7 +54,7 @@ export default{
   },  
   data() {
     return{
-      title: 'クソ野郎ちゃんはみなさまから人格の一部を寄付していただくことで成り立っています',
+      title: 'クソ野郎ちゃんはみなさまから人格の一部を寄付していただくことで成り立っています。',
       word: '',
       btnOps: {
         type: "circle",
@@ -137,9 +137,9 @@ export default{
     background-size: cover;    
   }
   #main {
-    width: 80vw;
+    width: 90vw;
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     }
@@ -157,7 +157,7 @@ export default{
     font-size: 16pt;
   }
   .title {
-  
+    font-family: 'Hannari', sans-serif;     
   }
   .line-bc {
     margin: 0 auto 24px 0;
@@ -184,7 +184,7 @@ export default{
     padding: 8px;
     border-radius: 12px;
     background: #30e852;
-    font-size: 15px;
+    font-size: 12px;
   }  
   .says p:after {
     content: "";
@@ -200,6 +200,9 @@ export default{
   .pbutton {
     text-align: center;
     margin-top: 24px;
+  }
+  .orbit-wrapper {
+    margin-bottom: 48px;
   }
   .orbit-spinner, .orbit-spinner * {
       box-sizing: border-box;
