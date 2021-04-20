@@ -11,9 +11,20 @@
             </div>            
           </div>
 
-          <h1 class="title is-4">{{ title }}</h1>
+          <h1 class="title is-5">{{ title }}</h1>
+          <div class="line-bc">
+            <div class="says">
+              <p>言いたいことなんでも言っちゃえ</p>
+            </div>
+            <div class="says">
+              <p>あなたに変わってクソ野郎ちゃんが世界につぶやくぜ</p>
+            </div>
+            <div class="says">
+              <p>あなたのクソ野郎なところ、出しちゃっていいよ</p>
+            </div>
+          </div>
           <div>
-            <input class="input is-danger is-forcused" type="text" placeholder="あなたの言葉を入力してください"v-model="word">
+            <textarea class="textarea is-danger is-forcused" type="text" placeholder="思っていることを吐き出してね。"v-model="word"></textarea>
           </div>
           <div class="pbutton">          
             <ParticleBtn
@@ -23,7 +34,7 @@
             cls="btn-cls"
             @click="test"
             >
-            寄付する
+            送信
             </ParticleBtn>
           </div>
         </div>
@@ -146,15 +157,49 @@ export default{
     font-size: 16pt;
   }
   .title {
-  font-family: 'Hannari', sans-serif;    
+  
   }
+  .line-bc {
+    margin: 0 auto 24px 0;
+    text-align: right;
+    font-size: 14px;
+  }
+
+  .ballon {
+    width: 100%;
+    margin: 10px 0;
+    overflow: hidden;
+  }
+  .chatting {
+    width: 100%;
+    text-align: left;
+  }
+  .says { 
+    margin: 10px 0;
+  }
+  .says p {
+    display: inline-block;
+    position: relative;
+    margin: 0 10px 0 0 ;
+    padding: 8px;
+    border-radius: 12px;
+    background: #30e852;
+    font-size: 15px;
+  }  
+  .says p:after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    right: -19px;
+    border: 8px solid transparent;
+    border-left: 18px solid #30e852;
+    -webkit-transform: rotate(-35deg);
+    transform: rotate(-35deg);
+  }  
+
   .pbutton {
     text-align: center;
-    margin-top: 2rem;
-    font-family: 'Sawarabi Mincho', sans-serif;
-  }
-  .orbit-wrapper {
-
+    margin-top: 24px;
   }
   .orbit-spinner, .orbit-spinner * {
       box-sizing: border-box;
