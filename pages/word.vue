@@ -57,11 +57,11 @@ export default{
       title: 'クソ野郎ちゃんはみなさまから人格の一部を寄付していただくことで成り立っています。',
       word: '',
       btnOps: {
+        
         type: "circle",
         easing: "easeInOutCubic",
         duration: 300,
         size: 60,
-        style: "stroke",
         direction: "bottom",
         particlesAmountCoefficient: 1,
         oscillationCoefficient: 1,
@@ -106,7 +106,8 @@ export default{
       });     
     },
     pageBack() {
-      this.$router.push("/"); 
+      location.href = 'https://zealous-chandrasekhar-8fae19.netlify.app/';
+      // this.$router.push("/"); 
     },  
     addData() {
       let date = new Date();
@@ -139,7 +140,7 @@ export default{
   #main {
     width: 90vw;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     }

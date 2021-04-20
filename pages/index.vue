@@ -122,7 +122,7 @@
           },
           onComplete: () => {
             console.log("しゅるしゅるしゅる");
-            this.$router.push("/word");
+            location.href = 'https://zealous-chandrasekhar-8fae19.netlify.app/word';
           },
           onBegin: () => {
             console.log("ぼわん");
