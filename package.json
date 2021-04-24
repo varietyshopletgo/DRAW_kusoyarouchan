@@ -28,7 +28,8 @@
     "vue-hacker-text": "^1.0.0",
     "vue-particle-effect-buttons": "^1.0.4",
     "vue-swal": "^1.0.0",
-    "vue-typer": "^1.2.0"
+    "vue-typer": "^1.2.0",
+    "vuex-persistedstate": "*"
   },
   "devDependencies": {
     "vue-particles": "^1.0.9"
