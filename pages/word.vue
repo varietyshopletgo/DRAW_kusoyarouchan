@@ -113,7 +113,10 @@
     },   
     created() {
       this.pageStyle.backgroundImage = "url('" + this.bgurl +"')";
-    }, 
+    },
+    mounted() {
+      this.$adobeFonts(document)
+    },     
     components: {
       ParticleBtn
     },
@@ -203,7 +206,7 @@
         this.isTextFlash = !this.isTextFlash;
       },
       clickButton(){
-        window.setTimeout(this.firstButton, 1000);
+        window.setTimeout(this.firstButton, 700);
       },
       firstButton(){
         this.bgurl = "/bg_white.jpg";  
@@ -220,8 +223,11 @@
 </script>
 
 <style>
-html, body {
-  height: 100%;
+html {
+  visibility: hidden;
+}
+html.wf-active {
+  visibility: visible;
 }
 
 #app {
@@ -244,23 +250,38 @@ html, body {
   left: 50%;
   transform: translateY(-50%) translateX(-50%);  
 }
+.indicate {
+  position:absolute;
+  top: 30px;
+  left: 30px;
+  transform: translateY(-50%) translateX(-50%);    
+}
+.mdi {
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
 .pbutton {
   text-align: center;
   margin-bottom: 5vh;
 }
+.btn-custom01-front{
+  font-family: yamamotoan-stdn, sans-serif;
+  font-weight: 800;
+}
 .imitation {
     color: #F0566E;
 }
-
 h1 {
   color: #000000 !important;
-  font-family: 'Hannari', sans-serif;
+  /* font-family: 'Hannari', sans-serif; */
+
 }
-.mdi {
-  font-size: 2.2rem;
-  color: white;
-  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+.title{
+  font-family: 'vdl-yotag', sans-serif;
+  font-weight: 500;
 }
+
 .iconwrapper {
   text-align: center;
   margin-bottom: 5vh;
@@ -272,14 +293,13 @@ h1 {
   text-align: center;
 }
 .hacker-text {
-  margin: 0 auto;
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   /* text-align: center; */
   font-size: 22px;
-  font-family: 'Sawarabi+Mincho', sans-serif;
+  font-family: vdl-yotag, sans-serif;
 }
 .btn-cls {
   background: linear-gradient(-135deg, #7826a4, #da11ad) !important;
@@ -290,14 +310,10 @@ h1 {
   text-align: left;
   color: black;
   margin: 0 auto 5vh auto;
-  width: 85vw
+  width: 85vw;
+  font-family: vdl-tbcgothic-std, sans-serif;
 }
-.indicate {
-  position:absolute;
-  top: 40px;
-  left: 40px;
-  transform: translateY(-50%) translateX(-50%);    
-}
+
 .textflash {
   animation: flash 2s ease-out infinite;
 }
@@ -317,7 +333,7 @@ h1 {
   padding: 5px 5px;
 }
 .vue-typer {
-  font-family: Hannari;
+  /* font-family: Hannari; */
 }
 .vue-typer .custom.char {
   color: #D4D4BD;
@@ -339,11 +355,10 @@ h1 {
 }
 .says p {
   /* color: black; */
-  font-family: 'Sawarabi+Mincho', sans-serif;
   display: inline-block;
   position: relative;
   margin: 0 10px 0 0 ;
-  padding: 8px;
+  padding: 10px;
   border-radius: 12px;
   background: white;
 }  

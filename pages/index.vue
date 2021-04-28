@@ -26,7 +26,7 @@
             </div>
           </div>
           <div>
-            <textarea class="textarea is-danger is-small" type="text" placeholder="思っていることを吐き出してね。"v-model="word"></textarea>
+            <textarea class="textarea is-danger" type="text" placeholder="思っていることを吐き出してね。"v-model="word"></textarea>
           </div>
           <div class="pbutton">          
             <ParticleBtn
@@ -141,6 +141,7 @@ export default{
 </script>
 
 <style>
+
   html {
     visibility: hidden;
   }
@@ -209,9 +210,10 @@ export default{
   }  
   .pbutton {
     text-align: center;
-    margin-top: 24px;
+    margin-top: 12px;
     font-size: 1.5rem;
     font-family: ab-kirigirisu, sans-serif;  
+    
   }
   .btn-cls{
     background: #f20000 !important;
