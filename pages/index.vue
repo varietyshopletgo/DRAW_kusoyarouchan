@@ -103,7 +103,7 @@ export default{
       .then((value) => {
         switch(value) {
           case "twitter":
-            window.open('https://twitter.com/_404_e_r_r_o_r_', '_blank');
+            location.href = 'https://zealous-chandrasekhar-8fae19.netlify.app/word';
             break;
           default:
             this.btnOps.visible =! this.btnOps.visible;

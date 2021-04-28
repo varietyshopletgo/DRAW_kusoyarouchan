@@ -21,12 +21,11 @@ export default {
       { hid: 'og:site_name', property: 'og:site_name', content: 'クソ野郎ちゃん｜v1.0' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://zealous-chandrasekhar-8fae19.netlify.app/' },
-      { hid: 'og:title', property: 'og:title', content: 'クソ野郎ちゃん｜v1.0' },
+      { hid: 'og:title', property: 'og:title', content: 'クソ野郎ちゃん｜v2.0' },
       { hid: 'og:description', property: 'og:description', content: 'わたしが全部引き受けてやるよ' },
       { hid: 'og:image', property: 'og:image', content: 'https://reiwacity-linebot.s3-ap-northeast-1.amazonaws.com/ogp.jpg' },
       { name: 'twitter:card', content: 'summary_large_image' },　//twitterの画像サイズ      
     ],
-    script: [{ src: "https://twemoji.maxcdn.com/v/latest/twemoji.min.js" }],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
@@ -92,11 +91,7 @@ export default {
     },
     {
       src: '~/plugins/epic-spinner'
-    },
-    {
-      src: '~/plugins/vue-popperjs'
-    }  
-
+    }
   ],
   /*
    ** Nuxt.js dev-modules
