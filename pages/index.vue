@@ -68,7 +68,7 @@ export default{
         particlesAmountCoefficient: 0.5,
         oscillationCoefficient: 1,
         color: function () {
-          return Math.random() < 0.5 ? "#000000" : "#ffffff";
+          return Math.random() < 0.5 ? "#e41010" : "#ffffff";
         },
         onComplete: () => {
           console.log("完了した");
@@ -84,7 +84,9 @@ export default{
       }      
     }
   },
-
+  mounted() {
+    this.$adobeFonts(document)
+  },
   methods: {
     test() {
       this.$swal("サンプル採取が完了しました！", "貢献に感謝します。\n\nご提供いただいたサンプルはクソ野郎ちゃんが美味しくいただきます。翌日以降反映されます。成長したクソ野郎ちゃんの姿をtwitterやLineでご確認ください。", {
@@ -139,6 +141,12 @@ export default{
 </script>
 
 <style>
+  html {
+    visibility: hidden;
+  }
+  html.wf-active {
+    visibility: visible;
+  }
   #app {
     position: relative;
     background-image: url("./static/bg_word.jpg");
@@ -162,7 +170,12 @@ export default{
     margin-bottom: 5vh;
   }    
   .title {
-    font-family: 'Hannari', sans-serif;     
+    font-family: ab-kirigirisu, sans-serif;  
+    color: white;   
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+  }
+  .swal-title{
+    font-family: ab-kirigirisu, sans-serif;  
   }
   .line-bc {
     margin: 0 auto 2vh 0;
@@ -195,6 +208,9 @@ export default{
   .pbutton {
     text-align: center;
     margin-top: 2vh;
+  }
+  .btn-cls{
+    background: #e41010 !important;
   }
   .swal-button--catch{
     padding: 7px, 19px;

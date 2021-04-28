@@ -83,6 +83,9 @@ export default {
       src: '~/plugins/vue-swal'
     },
     {
+      src: '~/plugins/adobe-fonts'
+    },    
+    {
       src: '~/plugins/vue-hacker-text.js',
       mode: 'client'
     },
