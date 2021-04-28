@@ -13,7 +13,7 @@
               <div class="orbit"></div>
             </div>            
           </div>
-          <h1 class="title is-5">{{ title }}</h1>
+          <h1 class="title is-4">{{ title }}</h1>
           <div class="line-bc">
             <div class="says">
               <p>言いたいことなんでも言っちゃえ</p>
@@ -26,7 +26,7 @@
             </div>
           </div>
           <div>
-            <textarea class="textarea is-danger is-forcused" type="text" placeholder="思っていることを吐き出してね。"v-model="word"></textarea>
+            <textarea class="textarea is-danger is-small" type="text" placeholder="思っていることを吐き出してね。"v-model="word"></textarea>
           </div>
           <div class="pbutton">          
             <ParticleBtn
@@ -68,7 +68,7 @@ export default{
         particlesAmountCoefficient: 0.5,
         oscillationCoefficient: 1,
         color: function () {
-          return Math.random() < 0.5 ? "#e41010" : "#ffffff";
+          return Math.random() < 0.5 ? "#f20000" : "#ffffff";
         },
         onComplete: () => {
           console.log("完了した");
@@ -155,6 +155,9 @@ export default{
   #main {
     width: 90vw;
   }
+  .hero-body {
+    padding: 24px 24px !important;
+  }
   .indicate {
     position:absolute;
     top: 30px;
@@ -172,13 +175,13 @@ export default{
   .title {
     font-family: ab-kirigirisu, sans-serif;  
     color: white;   
-    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   }
   .swal-title{
     font-family: ab-kirigirisu, sans-serif;  
   }
   .line-bc {
-    margin: 0 auto 2vh 0;
+    margin: 0 auto 24px 0;
     text-align: right;
     font-size: 14px;
   }
@@ -204,13 +207,15 @@ export default{
     -webkit-transform: rotate(-35deg);
     transform: rotate(-35deg);
   }  
-
   .pbutton {
     text-align: center;
-    margin-top: 2vh;
+    margin-top: 24px;
+    font-size: 1.5rem;
+    font-family: ab-kirigirisu, sans-serif;  
   }
   .btn-cls{
-    background: #e41010 !important;
+    background: #f20000 !important;
+    padding: 10px 48px !important;
   }
   .swal-button--catch{
     padding: 7px, 19px;
@@ -227,8 +232,8 @@ export default{
   }
 
   .orbit-spinner {
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
     margin: 0 auto;
     border-radius: 50%;
     perspective: 800px;
