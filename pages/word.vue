@@ -3,7 +3,7 @@
     <!-- ここからメイン -->
     <section class="hero is-fullheight"> 
       <div class="indicate">
-          <span class="mdi mdi-chevron-left " @click="pageBack"></span>  
+          <span class="mdi mdi-chevron-left" @click="pageBack"></span>  
       </div>  
       <div class="hero-body">
         <div id="main">
@@ -78,10 +78,10 @@
           </div>
         </div>                   
         <div class="iconwrapper">             
-            <span class="mdi mdi-emoticon-devil" @click="linebot"></span> 
-            <span class="mdi mdi-book-open-variant" @click="note"></span>              
-            <span class="mdi mdi-youtube" @click="youtube"></span>               
-            <span class="mdi mdi-twitter" @click="twitter"></span>                              
+            <span class="mdis mdi mdi-emoticon-devil" @click="linebot"></span> 
+            <span class="mdis mdi mdi-book-open-variant" @click="note"></span>              
+            <span class="mdis mdi mdi-youtube" @click="youtube"></span>               
+            <span class="mdis mdi mdi-twitter" @click="twitter"></span>                              
         </div>          
         <div class="footwrapper">
           <img src="~/static/reiwacitylogo.png" alt="令和市" class="footimg" @click="note">
@@ -172,27 +172,7 @@
         window.open('https://youtu.be/oZt95ZWvyXY', '_blank'); 
       },
       reiwaCity() {
-        this.$swal("クソ野郎ちゃんが自動生成した文章を、人間が編集してnoteに投稿するプロジェクトを行っています。\n\n人工知能とコミュニケーションして遊んでみませんか？参加を希望される方はtwitterDMまでご連絡ください。", {
-          icon: "info",
-          title: "日記",
-          className: "note-button",
-          buttons: {
-            cancel: true,            
-            note: {
-              text:"noteを見に行く",
-              value: "note"
-            },
-          },
-        })
-        .then((value) => {
-          switch(value) {
-            case "note":
-              window.open('https://note.com/_404_e_r_r_o_r_/m/m40a2ad85e1aa', '_blank');
-              break;
-            default:
-              break;                      
-          }
-        });     
+        window.open('https://previewer.adalo.com/7e89d6b4-efb5-435c-8ea3-3822f4a7c5c0/', '_blank');    
       }, 
       pageBack() {
         location.href = 'https://zealous-chandrasekhar-8fae19.netlify.app/';
@@ -256,8 +236,14 @@ html.wf-active {
   left: 30px;
   transform: translateY(-50%) translateX(-50%);    
 }
-.mdi {
+.mdi-chevron-left {
   font-size: 1.5rem;
+}
+.mdis {
+  font-size: 2.2rem;
+}
+
+.mdi {
   color: white;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
@@ -311,6 +297,7 @@ h1 {
   color: black;
   margin: 0 auto 5vh auto;
   width: 85vw;
+  font-size: 1.2rem;
   font-family: vdl-tbcgothic-std, sans-serif;
 }
 
