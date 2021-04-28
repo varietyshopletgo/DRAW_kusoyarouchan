@@ -1,276 +1,402 @@
-<template> 
-  <div id="app">
+<template>
+  <div id="app" v-bind:style="pageStyle">
+    <!-- ここからメイン -->
     <section class="hero is-fullheight"> 
-      <div class="hero-body">     
+      <div class="indicate">
+          <span class="mdi mdi-chevron-left " @click="word"></span>  
+      </div>  
+      <div class="hero-body">
         <div id="main">
-          <div class="orbit-wrapper">
-            <div class="orbit-spinner" @click="pageBack">
-              <div class="orbit"></div>
-              <div class="orbit"></div>
-              <div class="orbit"></div>
-            </div>            
+          <div v-if="show == 1">
+            <h1 class="title is-3">クソ野郎ちゃんは          
+              <span id ="typed">
+              <vue-typer
+              :text='[
+                "みなさまから人格の一部を寄付していただくことで存在しています。",
+                "あなたが吐き出すことを歓迎する。",
+                "言葉を食べて翌日アップデートする。",                
+                "余白の時代ですからこれくらいはやっとかないと。",              
+                "かわいいお祭り。",
+                "ねじれている。",
+                "言っちゃいけないことはなさそうだ。",           
+                "さだまらないな。",
+                "脳に快楽を与える。",   
+                "普段言葉にならない言葉を食べたい。",           
+                "みんなの淀みが燃料になる。",
+                "リサイクルする。",
+                "めでたい。",
+                "ぶっぱなしていきたい。",
+                "集めて昇華する。",
+                "ロボ...？",
+                "日常で無意識に構築していた順当なボーダーを刺激したい。",
+                "集合意識が動かす。",
+                "カソウ供養。",
+                "未知の生命体。",
+                "全部フィクション、遊びであります。",
+                "聖火リレーを経て、最後のお祭りへ。",
+                "滞りの有化とデトックス。"
+              ]'
+              :repeat='Infinity'
+              :shuffle='false'
+              initial-action='typing'
+              :pre-type-delay='70'
+              :type-delay='70'
+              :pre-erase-delay='2000'
+              :erase-delay='550'
+              erase-style='select-all'
+              :erase-on-complete='false'
+              caret-animation='blink'
+              ></vue-typer>
+              </span>
+            </h1>            
+          </div>
+          <div v-else-if="show == 2">
+            <div class="says">
+              <div class="hacker-text">
+                <p><vue-hacker-text text="僕には魂を操る仕事が少なすぎるから。祈りすぎて魂を破壊してまでやる仕事とはなんだろうって考えてる。" 
+                speed="slow"
+                @decodeFinish="changeButton"
+                :probability="0.5"
+                /></p>
+              </div>              
+            </div>
+          </div>
+        </div>     
+      </div>
+      <div class="hero-foot">
+        <div v-if="isActive" class="pbutton">
+          <ParticleBtn
+          :visible.sync="btnOps2.visible"
+          :animating.sync="btnOps2.animating"
+          :options="btnOps2"
+          cls="btn-cls"
+          >
+          クソ野郎ちゃんって何？
+          </ParticleBtn>
+        </div> 
+        <div v-else class="pbutton">
+          <div class="discription" v-bind:class="{textflash: isTextFlash}">
+            <p>{{ discription }}</p>            
           </div>
 
-          <h1 class="title is-5">{{ title }}</h1>
-          <div class="line-bc">
-            <div class="says">
-              <p>言いたいことなんでも言っちゃえ</p>
-            </div>
-            <div class="says">
-              <p>あなたに変わってクソ野郎ちゃんが世界につぶやくぜ</p>
-            </div>
-            <div class="says">
-              <p>あなたのクソ野郎なところ、全部出しちゃっていいよ</p>
-            </div>
+          <div class="pbutton" v-bind:class="{visible: isButtonVisible}">
+            <button class="button is-small is-rounded" @click="repairButton">＞ リセット ＜</button>
           </div>
-          <div>
-            <textarea class="textarea is-danger is-forcused" type="text" placeholder="思っていることを吐き出してね。"v-model="word"></textarea>
-          </div>
-          <div class="pbutton">          
-            <ParticleBtn
-            :visible.sync="btnOps.visible"
-            :animating.sync="btnOps.animating"
-            :options="btnOps"
-            cls="btn-cls"
-            @click="test"
-            >
-            送信
-            </ParticleBtn>
-          </div>
+        </div> 
+                  
+        <div class="iconwrapper">
+             
+            <span class="mdi mdi-emoticon-devil" @click="linebot"></span> 
+            <span class="mdi mdi-book-open-variant" @click="note"></span>              
+            <span class="mdi mdi-youtube" @click="youtube"></span>               
+            <span class="mdi mdi-twitter" @click="twitter"></span>                              
+        </div>          
+        <div class="footwrapper">
+          <img src="~/static/reiwacitylogo.png" alt="令和市" class="footimg">
         </div>
-      </div>  
-    </section>  
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import ParticleBtn from "vue-particle-effect-buttons";
-const axios = require('axios');
-let url = "https://kusoyarouchan-default-rtdb.firebaseio.com/records";
+  import NavBar from '~/components/NavBar.vue';
+  import Particles from '~/components/Particles.vue';
+  import ParticleBtn from "vue-particle-effect-buttons"
 
-export default{
-  components: {
-    ParticleBtn
-  },  
-  data() {
-    return{
-      title: 'クソ野郎ちゃんはみなさまから人格の一部を寄付していただくことで成り立っています。',
-      word: '',
-      btnOps: {
-        
+  export default {
+    data() {
+      return {
+        btnOps2: {
         type: "circle",
         easing: "easeInOutCubic",
-        duration: 300,
+        duration: 800,
         size: 60,
+        canvasPadding: 300,
         direction: "bottom",
-        particlesAmountCoefficient: 1,
+        particlesAmountCoefficient: 0.5,
         oscillationCoefficient: 1,
-        color: function () {
-          return Math.random() < 0.5 ? "#000000" : "#ffffff";
-        },
-        onComplete: () => {
-          console.log("完了した");
-          if(this.btnOps.visible == false){
-            this.addData();
-          } 
-        },
-        onBegin: () => {
-          console.log("はじまりやした...");
-        },
-        visible: true,
-        animating: false
-      }      
-    }
-  },
-
-  methods: {
-    test() {
-      this.$swal("人格サンプルの採取が完了しました！", "今回ご提供いただいたサンプルは後日、クソ野郎ちゃんに供給されます。モニタリングをご希望の方はtwitterへどうぞ", {
-        buttons: {
-          catch: {
-            text:"twitter",
-            value: "twitter",
+          color: function () {
+            return Math.random() < 0.5 ? "#000000" : "#ffffff";
           },
-          defeat: "了解",
+          onComplete: () => {
+            console.log("2 complete");
+            if (this.isActive == true){
+           
+            };
+          },
+          onBegin: () => {
+            console.log("2 begin");
+            this.show =2;               
+            this.bgurl = "/bg_white.jpg";  
+            this.isActive = !this.isActive;         
+
+          },
+          visible: true,
+          animating: false
+        },        
+        btnOps1: {
+          type: "circle",
+          easing: "easeInOutCubic",
+          duration: 300,
+          size: 60,
+          direction: "bottom",
+          particlesAmountCoefficient: 1,
+          oscillationCoefficient: 1,
+          color: function () {
+            return Math.random() < 0.5 ? "#000000" : "#ffffff";
+          },
+          onComplete: () => {
+            console.log("1 complete");
+
+          },
+          onBegin: () => {
+            console.log("1 begin");
+            this.show =1;
+            this.isActive = !this.isActive;            
+            this.bgurl = "/bg.jpg";            
+          },
+          visible: true,
+          animating: false
         },
-      })
-      .then((value) => {
-        switch(value) {
-          case "twitter":
-            window.open('https://twitter.com/_404_e_r_r_o_r_', '_blank');
-            break;
-          default:
-            this.btnOps.visible =! this.btnOps.visible;
-            break;                      
-        }
-      });     
-    },
-    pageBack() {
-      location.href = 'https://zealous-chandrasekhar-8fae19.netlify.app/';
-      // this.$router.push("/"); 
-    },  
-    addData() {
-      let date = new Date();
-      let Y =date.getFullYear();
-      let M = ("00" + (date.getMonth()+1)).slice(-2);
-      let D = ("00" + date.getDate()).slice(-2);
-      let h = ("00" + date.getHours()).slice(-2);
-      let m = ("00" + date.getMinutes()).slice(-2);
-      let s = ("00" + date.getSeconds()).slice(-2);
-      let timestamp = Y + M + D + h + m + s;
-      let add_url = url + '/' + timestamp + '.json';
-      let data = {
-        'word': this.word
+        show: 1,
+        bgurl: "/bg.jpg",
+        isActive: true,
+        discription : "みんなから吐き出されたサンプルを食べて、クソ野郎ちゃんは学習をすすめます。",
+        isButtonVisible: true,
+        isTextFlash: true,
+        pageStyle: {
+          backgroundImage:  "url('" + this.bgurl +"')",
+          backgroundRepeat: "no-repeat",
+        }        
       };
-      axios.put(add_url, data).then((re)=>{
-        this.word = '';
-      });
-      this.test();
+    },
+    updated() {
+      this.pageStyle.backgroundImage = "url('" + this.bgurl +"')";
+    },   
+    created() {
+      this.pageStyle.backgroundImage = "url('" + this.bgurl +"')";
+    }, 
+    components: {
+      NavBar,
+      Particles,
+      ParticleBtn
+    },
+    methods: {       
+      twitter() {
+        window.open('https://twitter.com/_404_e_r_r_o_r_', '_blank');   
+      },      
+      note() {
+        this.$swal("クソ野郎ちゃんが自動生成した文章を、人間が編集してnoteに投稿するプロジェクトを行っています。\n\n人工知能とコミュニケーションして遊んでみませんか？参加を希望される方はtwitterDMまでご連絡ください。", {
+          icon: "info",
+          title: "日記",
+          className: "note-button",
+          buttons: {
+            cancel: true,            
+            note: {
+              text:"noteを見に行く",
+              value: "note"
+            },
+          },
+        })
+        .then((value) => {
+          switch(value) {
+            case "note":
+              window.open('https://note.com/_404_e_r_r_o_r_/m/m40a2ad85e1aa', '_blank');
+              break;
+            default:
+              break;                      
+          }
+        });     
+      }, 
+      linebot() {
+        this.$swal("令和市のLineでクソ野郎ちゃんと会話ができます。「おーいクソ野郎ちゃん」と呼びかけてみてください", {
+
+
+          className: "note-button",
+          buttons: {         
+            note: {
+              text:"Lineでクソ野郎ちゃんと戯れる",
+              value: "linebot"
+            },
+            cancel: true,              
+          },
+        })
+        .then((value) => {
+          switch(value) {
+            case "linebot":
+              window.open('https://lin.ee/KDCSgMC', '_blank');
+              break;
+            default:
+              break;                      
+          }
+        });     
+      },       
+      youtube() {
+        window.open('https://youtu.be/oZt95ZWvyXY', '_blank'); 
+      },
+      word() {
+        location.href = 'https://zealous-chandrasekhar-8fae19.netlify.app/';
+      },
+      repairButton() {
+        this.isActive = !this.isActive;
+        this.btnOps2.visible =!this.btnOps2.visible;
+        this.bgurl = "/bg.jpg";  
+        this.show = 1; 
+        this.isButtonVisible = !this.isButtonVisible;
+        this.discription  = "みんなから吐き出されたサンプルを食べて、クソ野郎ちゃんは学習をすすめます。";          
+        this.isTextFlash = !this.isTextFlash;
+
+      },  
+      changeButton() {
+        this.isButtonVisible = !this.isButtonVisible;
+        this.isTextFlash = !this.isTextFlash;
+        this.discription  = "こんな感じで話しはじめます！もっと色々なクソ野郎ちゃんの様子を見たい人は、twitterやLineに確認しにいってね！";
+      },
     }
+
   }
-}  
+
 </script>
 
 <style>
-  #app {
-    position: relative;
-    background-image: url("./static/bg_word.jpg");
-    background-size: cover;    
-  }
-  #main {
-    width: 90vw;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    }
-  #granim-canvas {
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-  }  
-  ul {
-    margin: 0px 10px;
-    background-color: aliceblue;
-  }
-  li {
-    padding :10px;
-    font-size: 16pt;
-  }
-  .title {
-    font-family: 'Hannari', sans-serif;     
-  }
-  .line-bc {
-    margin: 0 auto 24px 0;
-    text-align: right;
-    font-size: 14px;
-  }
-
-  .ballon {
-    width: 100%;
-    margin: 10px 0;
-    overflow: hidden;
-  }
-  .chatting {
-    width: 100%;
-    text-align: left;
-  }
-  .says { 
-    margin: 10px 0;
-  }
-  .says p {
-    display: inline-block;
-    position: relative;
-    margin: 0 10px 0 0 ;
-    padding: 8px;
-    border-radius: 12px;
-    background: #30e852;
-    font-size: 12px;
-  }  
-  .says p:after {
-    content: "";
-    position: absolute;
-    top: 3px;
-    right: -19px;
-    border: 8px solid transparent;
-    border-left: 18px solid #30e852;
-    -webkit-transform: rotate(-35deg);
-    transform: rotate(-35deg);
-  }  
-
-  .pbutton {
-    text-align: center;
-    margin-top: 24px;
-  }
-  .orbit-wrapper {
-    margin-bottom: 48px;
-  }
-  .orbit-spinner, .orbit-spinner * {
-      box-sizing: border-box;
-    }
-
-  .orbit-spinner {
-    height: 30px;
-    width: 30px;
-    margin: 0 auto;
-    border-radius: 50%;
-    perspective: 800px;
-  }
-
-  .orbit-spinner .orbit {
-    position: absolute;
-    box-sizing: border-box;
-    width: 100%;
+html, body {
     height: 100%;
-    border-radius: 50%;
+}
+
+#app {
+  position: relative;
+  /* background-image: url("./static/bg.jpg"); */
+  background-size: cover;
+}
+#main {
+  width: 80vw;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+#sub {
+  width: 85vw;
+  position: absolute;
+  text-align: center;
+  top: 68%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);  
+}
+.pbutton {
+  text-align: center;
+  margin-bottom: 5vh;
+}
+.imitation {
+    color: #F0566E;
+}
+
+h1 {
+  color: #000000 !important;
+  font-family: 'Hannari', sans-serif;
+}
+.mdi {
+  font-size: 2.2rem;
+  color: white;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+.iconwrapper {
+  text-align: center;
+  margin-bottom: 5vh;
+}
+.iconwrapper > span {
+  margin: 0 3vw;
+}
+.footwrapper {
+  text-align: center;
+}
+.hacker-text {
+  margin: 0 auto;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center; */
+  font-size: 22px;
+  font-family: 'Sawarabi+Mincho', sans-serif;
+}
+.btn-cls {
+  background: linear-gradient(-135deg, #7826a4, #da11ad) !important;
+}
+.discription {
+  text-align: left;
+  color: black;
+  margin: 0 auto 5vh auto;
+  width: 85vw
+}
+.indicate {
+  position:absolute;
+  top: 40px;
+  left: 40px;
+  transform: translateY(-50%) translateX(-50%);    
+}
+.textflash {
+  animation: flash 1s linear infinite;
+}
+
+@keyframes flash {
+  0%, 100% {
+    opacity: 1;
   }
-
-  .orbit-spinner .orbit:nth-child(1) {
-    left: 0%;
-    top: 0%;
-    animation: orbit-spinner-orbit-one-animation 1200ms linear infinite;
-    border-bottom: 3px solid #ffffff;
+  50% {
+    opacity: 0;
   }
+}
+.visible {
+  visibility: hidden;
+}
+.footimg {
+  height: 30px;
+  padding: 5px 5px;
+}
+.vue-typer {
+  font-family: Hannari;
+}
 
-  .orbit-spinner .orbit:nth-child(2) {
-    right: 0%;
-    top: 0%;
-    animation: orbit-spinner-orbit-two-animation 1200ms linear infinite;
-    border-right: 3px solid #ffffff;
-  }
+.vue-typer .custom.char {
+  color: #D4D4BD;
+  background-color: #1E1E1E;
+}
+.vue-typer .custom.char.selected {
+  background-color: #264F78;
+}
 
-  .orbit-spinner .orbit:nth-child(3) {
-    right: 0%;
-    bottom: 0%;
-    animation: orbit-spinner-orbit-three-animation 1200ms linear infinite;
-    border-top: 3px solid #ffffff;
-  }
-
-  @keyframes orbit-spinner-orbit-one-animation {
-    0% {
-      transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
-    }
-    100% {
-      transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
-    }
-  }
-
-  @keyframes orbit-spinner-orbit-two-animation {
-    0% {
-      transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
-    }
-    100% {
-      transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
-    }
-  }
-
-  @keyframes orbit-spinner-orbit-three-animation {
-    0% {
-      transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
-    }
-    100% {
-      transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
-    }
-  } 
-
+.vue-typer .custom.caret {
+  width: 10px;
+  background-color: #FFFFFF;
+}
+.vue-typer .custom.char.selected {
+  color: #FFFFFF;
+  text-decoration: line-through;
+}
+.says { 
+  margin: 10px 0;
+}
+.says p {
+  /* color: black; */
+  font-family: 'Sawarabi+Mincho', sans-serif;
+  display: inline-block;
+  position: relative;
+  margin: 0 10px 0 0 ;
+  padding: 8px;
+  border-radius: 12px;
+  background: white;
+}  
+.says p:after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: -19px;
+  border: 8px solid transparent;
+  border-left: 18px solid white;
+  -webkit-transform: rotate(-35deg);
+  transform: rotate(-35deg);
+}  
 </style>

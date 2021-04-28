@@ -1,210 +1,305 @@
-<template>
+<template> 
   <div id="app">
-    <!-- ここからメイン -->
     <section class="hero is-fullheight"> 
-      <div class="hero-body">
+      <div class="indicate">
+          <span class="mdi mdi-information " @click="pageBack"></span>  
+      </div>      
+      <div class="hero-body">     
         <div id="main">
-          <h1 class="title is-3">クソ野郎ちゃんは          
-            <span id ="typed">
-            <vue-typer
-            :text='[
-              "みなさまから人格の一部を寄付していただくことで成り立っています。",
-              "適当なタイミングでつぶやくよ。",
-              "かわいいお祭り。",
-              "体内に乗り込んで操縦するタイプの令和市民。",
-              "中に乗れる。",
-              "余白の時代ですからこれくらいはやっとかないと。",
-              "市民というか公共施設。",
-              "さだまらないな。",
-              "みんなの淀みが燃料的な感じになる。",
-              "みんなの淀みを集めて吐き出して、燃えて聖歌になる。",
-              "めでたい。",
-              "溜め込んだものを一気に放出する日があって、それを祭りのキャンプファイヤーのように眺める。",
-              "出現は特定の日だけで、錬成は日々できる。",
-              "集めて燃やす。",
-              "リサイクルする。",
-              "ロボ...？",
-              "街を破壊してそうでしてない。",
-              "集合的意識が動かすもの。",
-              "カソウ供養。",
-              "コックリさん的な人力回るプール。",
-              "未知の生命体。",
-              "儀式。",
-              "フィクションと割り切ると自由にできていいね。",
-              "全部ただのお話、遊びであります。",
-              "聖火リレーを経て、最後のお祭りへ。",
-              "滞りの有化とデトックス。",
-              "腹話術のようにキャラに喋らせることで、浄化されていく思いもあるのではないか。",
-              "言っちゃいけないことはなさそうだ。"
-            ]'
-            :repeat='Infinity'
-            :shuffle='false'
-            initial-action='typing'
-            :pre-type-delay='70'
-            :type-delay='70'
-            :pre-erase-delay='2000'
-            :erase-delay='550'
-            erase-style='select-all'
-            :erase-on-complete='false'
-            caret-animation='blink'
-            ></vue-typer>
-            </span>
-          </h1>
-        </div>     
-        <div id="sub">
-          <div class="pbutton">
-            <ParticleBtn
-            :visible.sync="btnOps2.visible"
-            :animating.sync="btnOps2.animating"
-            :options="btnOps2"
-            cls="btn-cls"
-            >
-            精神を錬成する
-            </ParticleBtn>
-          </div>          
-          <div class="pbutton">
-            <ParticleBtn
-            :visible.sync="btnOps1.visible"
-            :animating.sync="btnOps1.animating"
-            :options="btnOps1"
-            cls="btn-cls"
-            >
-            肉体を錬成する
-            </ParticleBtn>
+          <div class="orbit-wrapper">
+            <div class="orbit-spinner" @click="pageBack">
+              <div class="orbit"></div>
+              <div class="orbit"></div>
+              <div class="orbit"></div>
+            </div>            
           </div>
 
-          <div class="imitation"><router-link to ="/draw">・</router-link></div> 
-       </div> 
-     </div>
-    </section>
+          <h1 class="title is-5">{{ title }}</h1>
+          <div class="line-bc">
+            <div class="says">
+              <p>言いたいことなんでも言っちゃえ</p>
+            </div>
+            <div class="says">
+              <p>言葉を食べてクソ野郎ちゃんが世界に放つぜ</p>
+            </div>
+            <div class="says">
+              <p>あなたのクソ野郎なところ、全部出しちゃっていいよ</p>
+            </div>
+          </div>
+          <div>
+            <textarea class="textarea is-danger is-forcused" type="text" placeholder="思っていることを吐き出してね。"v-model="word"></textarea>
+          </div>
+          <div class="pbutton">          
+            <ParticleBtn
+            :visible.sync="btnOps.visible"
+            :animating.sync="btnOps.animating"
+            :options="btnOps"
+            cls="btn-cls"
+            @click="test"
+            >
+            送信
+            </ParticleBtn>
+          </div>
+        </div>
+      </div>  
+    </section>  
   </div>
 </template>
 
 <script>
-  import NavBar from '~/components/NavBar.vue';
-  import Particles from '~/components/Particles.vue';
-  import ParticleBtn from "vue-particle-effect-buttons"
+import ParticleBtn from "vue-particle-effect-buttons";
+const axios = require('axios');
+let url = "https://kusoyarouchan-default-rtdb.firebaseio.com/records";
 
-  export default {
-    data() {
-      return {
-        btnOps1: {
-          type: "circle",
-          easing: "easeInOutCubic",
-          duration: 300,
-          size: 60,
-          direction: "bottom",
-          particlesAmountCoefficient: 1,
-          oscillationCoefficient: 1,
-          color: function () {
-            return Math.random() < 0.5 ? "#000000" : "#ffffff";
-          },
-          onComplete: () => {
-            console.log("下の点から行けないこともない");
-            this.popUp();
-          },
-          onBegin: () => {
-            console.log("まだできてないんだよな");
-          },
-          visible: true,
-          animating: false
+export default{
+  components: {
+    ParticleBtn
+  },  
+  data() {
+    return{
+      title: 'クソ野郎ちゃんはみなさまから人格の一部を寄付していただくことで存在しています。',
+      word: '',
+      btnOps: {
+        
+        type: "circle",
+        easing: "easeInOutCubic",
+        duration: 800,
+        size: 60,
+        canvasPadding: 300,
+        direction: "bottom",
+        particlesAmountCoefficient: 0.5,
+        oscillationCoefficient: 1,
+        color: function () {
+          return Math.random() < 0.5 ? "#000000" : "#ffffff";
         },
-       btnOps2: {
-          type: "rectangle",
-          easing: "easeInOutCubic",
-          duration: 300,
-          size: 60,
-          direction: "bottom",
-          particlesAmountCoefficient: 1,
-          oscillationCoefficient: 1,
-          color: function () {
-            return Math.random() < 0.5 ? "#000000" : "#ffffff";
-          },
-          onComplete: () => {
-            console.log("しゅるしゅるしゅる");
-            location.href = 'https://zealous-chandrasekhar-8fae19.netlify.app/word';
-          },
-          onBegin: () => {
-            console.log("ぼわん");
-          },
-          visible: true,
-          animating: false
-        },        
-      }
-    },    
-    components: {
-      NavBar,
-      Particles,
-      ParticleBtn
-    },
-    methods: {
-        popUp(){
-            this.$swal("ただいま工事中です","開演までお待ちください", "info");
-            if(this.btnOps1.visible == false){
-            this.btnOps1.visible =! this.btnOps1.visible;
-            };
-        }
+        onComplete: () => {
+          console.log("完了した");
+          if(this.btnOps.visible == false){
+            this.addData();
+          } 
+        },
+        onBegin: () => {
+          console.log("はじまりやした...");
+        },
+        visible: true,
+        animating: false
+      }      
     }
+  },
 
+  methods: {
+    test() {
+      this.$swal("サンプル採取が完了しました！", "貢献に感謝します！\n\nご提供いただいたサンプルはクソ野郎ちゃんが美味しくいただきます。反映されるのは翌日以降です。成長したクソ野郎ちゃんの様子をtwitterやLineでご確認ください。", {
+        icon: "success",
+        dangerMode: true,
+        buttons: {
+          catch: {
+            text:"さらに詳しく",
+            value: "twitter"
+          },
+          cancel: "OK",
+        },
+      })
+      .then((value) => {
+        switch(value) {
+          case "twitter":
+            window.open('https://twitter.com/_404_e_r_r_o_r_', '_blank');
+            break;
+          default:
+            this.btnOps.visible =! this.btnOps.visible;
+            break;                      
+        }
+      });     
+    },
+    
+    pageBack() {
+      location.href = 'https://zealous-chandrasekhar-8fae19.netlify.app/word';
+      // this.$router.push("/"); 
+    }, 
+     
+    addData() {
+      let date = new Date();
+      let Y =date.getFullYear();
+      let M = ("00" + (date.getMonth()+1)).slice(-2);
+      let D = ("00" + date.getDate()).slice(-2);
+      let h = ("00" + date.getHours()).slice(-2);
+      let m = ("00" + date.getMinutes()).slice(-2);
+      let s = ("00" + date.getSeconds()).slice(-2);
+      let timestamp = Y + M + D + h + m + s;
+      let add_url = url + '/' + timestamp + '.json';
+      let data = {
+        'word': this.word
+      };
+      axios.put(add_url, data).then((re)=>{
+        this.word = '';
+      });
+      this.test();
+    },
+    getData() {
+
+    },
   }
-
+}  
 </script>
 
 <style>
-html, body {
+  #app {
+    position: relative;
+    background-image: url("./static/bg_word.jpg");
+    background-size: cover;    
+  }
+  #main {
+    width: 90vw;
+    /* position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%); */
+    }
+  #granim-canvas {
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+  }  
+  ul {
+    margin: 0px 10px;
+    background-color: aliceblue;
+  }
+  li {
+    padding :10px;
+    font-size: 16pt;
+  }
+  .title {
+    font-family: 'Hannari', sans-serif;     
+  }
+  .line-bc {
+    margin: 0 auto 24px 0;
+    text-align: right;
+    font-size: 14px;
+  }
+
+  .ballon {
+    width: 100%;
+    margin: 10px 0;
+    overflow: hidden;
+  }
+  .chatting {
+    width: 100%;
+    text-align: left;
+  }
+  .says { 
+    margin: 10px 0;
+  }
+  .says p {
+    display: inline-block;
+    position: relative;
+    margin: 0 10px 0 0 ;
+    padding: 8px;
+    border-radius: 12px;
+    background: #30e852;
+    font-size: 12px;
+  }  
+  .says p:after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    right: -19px;
+    border: 8px solid transparent;
+    border-left: 18px solid #30e852;
+    -webkit-transform: rotate(-35deg);
+    transform: rotate(-35deg);
+  }  
+  .indicate {
+    position:absolute;
+    top: 40px;
+    left: 40px;
+    transform: translateY(-50%) translateX(-50%);    
+  }
+  .mdi {
+  font-size: 2rem;
+  color: white;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+  .pbutton {
+    text-align: center;
+    margin-top: 24px;
+  }
+  .swal-button--catch{
+    padding: 7px, 19px;
+    border-radius: 2px;
+    background: linear-gradient(to right, #F13F79, #FFC778);
+    font-size: 12px;
+    border: 1px solid #fa1f1f;
+    /* text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); */
+  }
+  .orbit-wrapper {
+    margin-bottom: 20px;
+  }
+  .orbit-spinner, .orbit-spinner * {
+      box-sizing: border-box;
+    }
+
+  .orbit-spinner {
+    height: 30px;
+    width: 30px;
+    margin: 0 auto;
+    border-radius: 50%;
+    perspective: 800px;
+  }
+
+  .orbit-spinner .orbit {
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
     height: 100%;
-}
+    border-radius: 50%;
+  }
 
-#app {
-  position: relative;
-  background-image: url("./static/bg.jpg");
-  background-size: cover;
-}
+  .orbit-spinner .orbit:nth-child(1) {
+    left: 0%;
+    top: 0%;
+    animation: orbit-spinner-orbit-one-animation 1200ms linear infinite;
+    border-bottom: 3px solid #ffffff;
+  }
 
-#main {
-  width: 80vw;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-}
-#sub {
-  width: 80vw;
-  position: absolute;
-  text-align: center;
-  top: 68%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);  
-}
+  .orbit-spinner .orbit:nth-child(2) {
+    right: 0%;
+    top: 0%;
+    animation: orbit-spinner-orbit-two-animation 1200ms linear infinite;
+    border-right: 3px solid #ffffff;
+  }
 
-.pbutton {
-  margin-bottom: 1rem;
-}
-.imitation {
-    color: #F0566E;
-}
-h1 {
-  color: #000000 !important;
-  font-family: 'Hannari', sans-serif;
-}
-.vue-typer {
-  font-family: Hannari;
-}
+  .orbit-spinner .orbit:nth-child(3) {
+    right: 0%;
+    bottom: 0%;
+    animation: orbit-spinner-orbit-three-animation 1200ms linear infinite;
+    border-top: 3px solid #ffffff;
+  }
 
-.vue-typer .custom.char {
-  color: #D4D4BD;
-  background-color: #1E1E1E;
-}
-.vue-typer .custom.char.selected {
-  background-color: #264F78;
-}
+  @keyframes orbit-spinner-orbit-one-animation {
+    0% {
+      transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+    }
+  }
 
-.vue-typer .custom.caret {
-  width: 10px;
-  background-color: #FFFFFF;
-}
-.vue-typer .custom.char.selected {
-  color: #FFFFFF;
-  text-decoration: line-through;
-}
+  @keyframes orbit-spinner-orbit-two-animation {
+    0% {
+      transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+    }
+  }
+
+  @keyframes orbit-spinner-orbit-three-animation {
+    0% {
+      transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+    }
+  } 
+
 </style>

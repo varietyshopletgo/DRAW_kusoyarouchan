@@ -87,8 +87,16 @@ export default {
       src: '~/plugins/vue-swal'
     },
     {
+      src: '~/plugins/vue-hacker-text.js',
+      mode: 'client'
+    },
+    {
       src: '~/plugins/epic-spinner'
-    }     
+    },
+    {
+      src: '~/plugins/vue-popperjs'
+    }  
+
   ],
   /*
    ** Nuxt.js dev-modules
