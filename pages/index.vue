@@ -2,7 +2,7 @@
   <div id="app">
     <section class="hero is-fullheight"> 
       <div class="indicate">
-          <span class="mdi mdi-information " @click="pageBack"></span>  
+        <span class="mdi mdi-emoticon-devil" @click="pageBack"></span>  
       </div>      
       <div class="hero-body">     
         <div id="main">
@@ -13,7 +13,6 @@
               <div class="orbit"></div>
             </div>            
           </div>
-
           <h1 class="title is-5">{{ title }}</h1>
           <div class="line-bc">
             <div class="says">
@@ -59,8 +58,7 @@ export default{
     return{
       title: 'クソ野郎ちゃんはみなさまから人格の一部を寄付していただくことで存在しています。',
       word: '',
-      btnOps: {
-        
+      btnOps: {        
         type: "circle",
         easing: "easeInOutCubic",
         duration: 800,
@@ -89,7 +87,7 @@ export default{
 
   methods: {
     test() {
-      this.$swal("サンプル採取が完了しました！", "貢献に感謝します！\n\nご提供いただいたサンプルはクソ野郎ちゃんが美味しくいただきます。反映されるのは翌日以降です。成長したクソ野郎ちゃんの様子をtwitterやLineでご確認ください。", {
+      this.$swal("サンプル採取が完了しました！", "貢献に感謝します。\n\nご提供いただいたサンプルはクソ野郎ちゃんが美味しくいただきます。翌日以降反映されます。成長したクソ野郎ちゃんの姿をtwitterやLineでご確認ください。", {
         icon: "success",
         dangerMode: true,
         buttons: {
@@ -110,13 +108,11 @@ export default{
             break;                      
         }
       });     
-    },
-    
+    },  
     pageBack() {
       location.href = 'https://zealous-chandrasekhar-8fae19.netlify.app/word';
       // this.$router.push("/"); 
-    }, 
-     
+    },      
     addData() {
       let date = new Date();
       let Y =date.getFullYear();
@@ -150,41 +146,28 @@ export default{
   }
   #main {
     width: 90vw;
-    /* position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%); */
-    }
-  #granim-canvas {
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
+  }
+  .indicate {
+    position:absolute;
+    top: 30px;
+    left: 30px;
+    transform: translateY(-50%) translateX(-50%);    
+  }
+  .mdi {
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
   }  
-  ul {
-    margin: 0px 10px;
-    background-color: aliceblue;
-  }
-  li {
-    padding :10px;
-    font-size: 16pt;
-  }
+  .orbit-wrapper {
+    margin-bottom: 5vh;
+  }    
   .title {
     font-family: 'Hannari', sans-serif;     
   }
   .line-bc {
-    margin: 0 auto 24px 0;
+    margin: 0 auto 2vh 0;
     text-align: right;
     font-size: 14px;
-  }
-
-  .ballon {
-    width: 100%;
-    margin: 10px 0;
-    overflow: hidden;
-  }
-  .chatting {
-    width: 100%;
-    text-align: left;
   }
   .says { 
     margin: 10px 0;
@@ -208,35 +191,24 @@ export default{
     -webkit-transform: rotate(-35deg);
     transform: rotate(-35deg);
   }  
-  .indicate {
-    position:absolute;
-    top: 40px;
-    left: 40px;
-    transform: translateY(-50%) translateX(-50%);    
-  }
-  .mdi {
-  font-size: 2rem;
-  color: white;
-  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
-}
+
   .pbutton {
     text-align: center;
-    margin-top: 24px;
+    margin-top: 2vh;
   }
   .swal-button--catch{
     padding: 7px, 19px;
     border-radius: 2px;
     background: linear-gradient(to right, #F13F79, #FFC778);
     font-size: 12px;
-    border: 1px solid #fa1f1f;
+    /* border: 1px solid #fa1f1f; */
     /* text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); */
   }
-  .orbit-wrapper {
-    margin-bottom: 20px;
-  }
+
+  /* orbit-icon */
   .orbit-spinner, .orbit-spinner * {
       box-sizing: border-box;
-    }
+  }
 
   .orbit-spinner {
     height: 30px;

@@ -25,12 +25,10 @@
     "nuxt-fontawesome": "^0.4.0",
     "particles.vue": "^2.9.2",
     "pixi.js-legacy": "^6.0.2",
-    "v-video-embed": "^1.0.8",
     "vue-audio-visual": "^2.2.2",
     "vue-burger-menu": "^2.0.5",
     "vue-hacker-text": "^1.0.0",
     "vue-particle-effect-buttons": "^1.0.4",
-    "vue-popperjs": "^2.3.0",
     "vue-swal": "^1.0.0",
     "vue-typer": "^1.2.0",
     "vuex-persistedstate": "*"
