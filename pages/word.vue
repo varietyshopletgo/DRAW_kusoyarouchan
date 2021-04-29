@@ -297,7 +297,7 @@ h1 {
   color: black;
   margin: 0 auto 5vh auto;
   width: 85vw;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: vdl-tbcgothic-std, sans-serif;
 }
 
@@ -408,7 +408,14 @@ a.btn-custom01:before {
   border-radius: inherit;
   background: linear-gradient(-135deg, #7826a4, #da11ad);
 }
-
+a.btn-custom01:hover {
+  transform: translate(0, 0.25rem);
+  background: linear-gradient(-135deg, #7826a4, #da11ad);
+}
+a.btn-custom01:hover:before {
+  transform: translate3d(0, 0.5rem, -1rem);
+  box-shadow: 0 0.35rem 0 0 rgba(0, 0, 0, 0.2);
+}
 a.btn-custom01:active {
   transform: translate(0rem, 0.75rem);
 }
