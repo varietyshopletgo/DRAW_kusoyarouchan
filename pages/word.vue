@@ -84,7 +84,7 @@
             <span class="mdis mdi mdi-twitter" @click="twitter"></span>                              
         </div>          
         <div class="footwrapper">
-          <img src="~/static/reiwacitylogo.png" alt="令和市" class="footimg" @click="note">
+          <img src="~/static/reiwacitylogo.png" alt="令和市" class="footimg" @click="reiwaCity">
         </div>
       </div>
     </section>
@@ -125,14 +125,14 @@
         window.open('https://twitter.com/_404_e_r_r_o_r_', '_blank');   
       },      
       note() {
-        this.$swal("クソ野郎ちゃんが自動生成した文章を、人間が編集してnoteに投稿するプロジェクトを行っています。\n\n人工知能とコミュニケーションして遊んでみませんか？参加を希望される方はtwitterDMまでご連絡ください。", {
+        this.$swal("クソ野郎ちゃんが自動生成した文章を、人間が編集してnoteに投稿するプロジェクトを行っています。\n\n人工知能とコミュニケーションして創作してみませんか？参加を希望される方はtwitterDMまでご連絡ください。", {
           icon: "info",
           title: "日記",
           className: "note-button",
           buttons: {
             cancel: true,            
             note: {
-              text:"noteを見に行く",
+              text:"noteを見る",
               value: "note"
             },
           },
@@ -152,7 +152,7 @@
           className: "note-button",
           buttons: {         
             note: {
-              text:"Lineでクソ野郎ちゃんと戯れる",
+              text:"クソ野郎ちゃんと戯れる",
               value: "linebot"
             },
             cancel: true,              
@@ -186,7 +186,7 @@
         this.isTextFlash = !this.isTextFlash;
       },
       clickButton(){
-        window.setTimeout(this.firstButton, 700);
+        window.setTimeout(this.firstButton, 600);
       },
       firstButton(){
         this.bgurl = "/bg_white.jpg";  
@@ -196,7 +196,7 @@
       changeButton() {
         this.isButtonVisible = !this.isButtonVisible;
         this.isTextFlash = !this.isTextFlash;
-        this.discription  = "こんな感じで話しはじめます！もっと色々なクソ野郎ちゃんの様子を見たい人は、twitterやLineに確認しにいってね！";
+        this.discription  = "こんな感じで過去のみんなの投稿が溶け合ってアウトプットされます！もっと色々なクソ野郎ちゃんの様子を見たい人は、twitterやLineで確認してみてね！";
       },
     }
   }
@@ -293,7 +293,7 @@ h1 {
   box-shadow: 0 5px 10px rbga(0, 0, 0, .1);
 }
 .discription {
-  text-align: left;
+  text-align: center;
   color: black;
   margin: 0 auto 5vh auto;
   width: 85vw;
@@ -392,7 +392,7 @@ a.btn-custom01:before {
   width: 100%;
   height: 100%;
   content: "";
-  transition: all 0.3s;
+  transition: all 0.2s;
   transform: translate3d(0, 0.75rem, -1rem);
   border: 2px solid #000;
   border-radius: inherit;
@@ -403,19 +403,12 @@ a.btn-custom01:before {
   position: relative;
   display: block;
   padding: 1rem 1.5rem 1rem 1.5rem;
-  transition: all 0.3s;
+  transition: all 0.2s;
   border: 2px solid #000;
   border-radius: inherit;
   background: linear-gradient(-135deg, #7826a4, #da11ad);
 }
-a.btn-custom01:hover {
-  transform: translate(0, 0.25rem);
-  background: linear-gradient(-135deg, #7826a4, #da11ad);
-}
-a.btn-custom01:hover:before {
-  transform: translate3d(0, 0.5rem, -1rem);
-  box-shadow: 0 0.35rem 0 0 rgba(0, 0, 0, 0.2);
-}
+
 a.btn-custom01:active {
   transform: translate(0rem, 0.75rem);
 }
