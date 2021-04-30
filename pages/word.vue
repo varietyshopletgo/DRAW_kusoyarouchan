@@ -5,8 +5,8 @@
       <div class="indicate">
           <span class="mdi mdi-chevron-left" @click="pageBack"></span>  
       </div>  
-      <div class="hero-body">
-        <div id="main" onclick="">
+      <div class="hero-body" onclick="">
+        <div id="main">
           <div v-if="show == 1">
             <h1 class="title is-3">クソ野郎ちゃんは          
               <span id ="typed">
@@ -80,8 +80,8 @@
         <div class="iconwrapper">             
             <span class="mdis mdi mdi-emoticon-devil" @click="linebot"></span> 
             <span class="mdis mdi mdi-book-open-variant" @click="note"></span>              
-            <span class="mdis mdi mdi-youtube" @click="youtube"></span>               
-            <span class="mdis mdi mdi-twitter" @click="twitter"></span>                              
+            <span class="mdis mdi mdi-twitter" @click="twitter"></span>               
+            <span class="mdis mdi mdi-youtube" @click="youtube"></span>                                        
         </div>          
         <div class="footwrapper">
           <img src="~/static/reiwacitylogo.png" alt="令和市" class="footimg" @click="reiwaCity">
@@ -148,7 +148,7 @@
         });     
       }, 
       linebot() {
-        this.$swal("令和市のLineでクソ野郎ちゃんと会話ができます。「おーいクソ野郎ちゃん」と呼びかけてみてください", {
+        this.$swal("令和市のLineでクソ野郎ちゃんと会話ができます。「おーいクソ野郎ちゃん」と呼びかけてみてください。", {
           className: "note-button",
           buttons: {         
             note: {
@@ -196,7 +196,7 @@
       changeButton() {
         this.isButtonVisible = !this.isButtonVisible;
         this.isTextFlash = !this.isTextFlash;
-        this.discription  = "こんな感じで過去のみんなの投稿が溶け合ってアウトプットされます！もっと色々なクソ野郎ちゃんの様子を見たい人は、twitterやLineで確認してみてね！";
+        this.discription  = "こんな感じで過去の投稿が溶け合ってアウトプットされます！もっと色々なクソ野郎ちゃんの様子を見たい人は、twitterやLineで確認してみてくださいね！";
       },
     }
   }
@@ -408,14 +408,14 @@ a.btn-custom01:before {
   border-radius: inherit;
   background: linear-gradient(-135deg, #7826a4, #da11ad);
 }
-a.btn-custom01:hover {
+/* a.btn-custom01:hover {
   transform: translate(0, 0.25rem);
   background: linear-gradient(-135deg, #7826a4, #da11ad);
 }
 a.btn-custom01:hover:before {
   transform: translate3d(0, 0.5rem, -1rem);
   box-shadow: 0 0.35rem 0 0 rgba(0, 0, 0, 0.2);
-}
+} */
 a.btn-custom01:active {
   transform: translate(0rem, 0.75rem);
 }
