@@ -6,7 +6,7 @@
           <span class="mdi mdi-chevron-left" @click="pageBack"></span>  
       </div>  
       <div class="hero-body">
-        <div id="main">
+        <div id="main" onclick="">
           <div v-if="show == 1">
             <h1 class="title is-3">クソ野郎ちゃんは          
               <span id ="typed">
@@ -206,7 +206,7 @@
 html {
   visibility: hidden;
 }
-html.wf-active {
+html.wf-active{
   visibility: visible;
 }
 

@@ -176,6 +176,7 @@ export default{
   .title {
     font-family: ab-kirigirisu, sans-serif;  
     color: white;   
+    text-align: center;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   }
   .swal-title{
