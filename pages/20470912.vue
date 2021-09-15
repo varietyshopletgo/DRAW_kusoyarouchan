@@ -1,6 +1,6 @@
 <template>
   <div id = "app">
-    <video src="https://dl.dropboxusercontent.com/s/uy4m6dym157eys6/20470912.mp4" oncontextmenu="return false;" controls controlsList="nodownload" width="100%" height="100%"></video>
+    <video src="https://dl.dropboxusercontent.com/s/uy4m6dym157eys6/20470912.mp4" preload="auto" oncontextmenu="return false;" controls controlsList="nodownload" width="100%" height="100%"></video>
   </div>
 </template>
 
