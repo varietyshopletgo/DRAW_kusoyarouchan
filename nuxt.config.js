@@ -5,7 +5,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: "クソ野郎ちゃん｜v2.0",
+    title: "20470912'",
     htmlAttrs: {
       lang: 'ja',
       prefix: 'og: http://ogp.me/ns#'
@@ -18,7 +18,7 @@ export default {
         name: "description",
         content: process.env.npm_package_description || ""
       },
-      { hid: 'og:site_name', property: 'og:site_name', content: 'クソ野郎ちゃん｜v2.0' },
+      { hid: 'og:site_name', property: 'og:site_name', content: '20470912' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://zealous-chandrasekhar-8fae19.netlify.app/' },
       { hid: 'og:title', property: 'og:title', content: 'クソ野郎ちゃん｜v2.0' },
